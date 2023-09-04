@@ -16,10 +16,11 @@ class UserTableSeeder extends Seeder
     {
         //
         User::create([
-           'name' => 'Sys Admin',
+           'firstname' => 'Sys',
+           'lastname' => 'Admin',
            'email' => 'sysadmin@example.com',
            'password' => Hash::make('admin@1234'),
-           'role' => 'admin'
+           'role' => 'Admin'
         ]);
     }
 }

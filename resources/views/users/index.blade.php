@@ -16,26 +16,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>jdoe@elibrary.com</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-power"></i> Reset Password</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-success rounded" href="#"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
-                            </td>
-                            <td>
-                                <form action="#" method="post">
-                                    @csrf
-                                    @method('Delete')
-                                    <button type="submit" class="btn btn-sm btn-danger rounded"
-                                    ><i class="mdi mdi-archive"></i> Delete</button
-                                    >
-                                </form>
-                            </td>
-                        </tr>
-
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-power"></i> Reset Password</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-success rounded" href="{{ route('users.edit', $user) }}"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('users.destroy', $user) }}" method="post">
+                                        @csrf
+                                        @method('Delete')
+                                        <button type="submit" class="btn btn-sm btn-danger rounded"
+                                        ><i class="mdi mdi-archive"></i> Delete</button
+                                        >
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
