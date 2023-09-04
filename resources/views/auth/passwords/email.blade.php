@@ -1,11 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+
+            <div class="card container col-6">
+                <div class="card-header text-primary">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -41,7 +39,5 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
 @endsection

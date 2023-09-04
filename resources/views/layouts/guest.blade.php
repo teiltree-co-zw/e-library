@@ -30,30 +30,28 @@
 </head>
 <body>
 <div class="container-scroller">
-   @include('partials.nav')
-    <div class="container-fluid page-body-wrapper">
-        @include('partials.aside')
-        <div class="main-panel">
-            <div class="content-wrapper">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth">
             @yield('content')
-            </div>
         </div>
+        <!-- content-wrapper ends -->
     </div>
+
 </div>
-    <!-- plugins:js -->
-    <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets/js/misc.js') }}"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-    <!-- End custom js for this page -->
+<!-- plugins:js -->
+<script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-circle-progress/js/circle-progress.min.js') }}"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+<script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('assets/js/misc.js') }}"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="{{ asset('assets/js/dashboard.js') }}"></script>
+<!-- End custom js for this page -->
 </body>
 </html>
