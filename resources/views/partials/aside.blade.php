@@ -31,6 +31,12 @@
                 <span class="menu-title">Books & Files</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('library.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('library.index') }}">
+                <span class="icon-bg"><i class="mdi mdi-book-open-page-variant menu-icon"></i></span>
+                <span class="menu-title">Library</span>
+            </a>
+        </li>
 
 
         <li>

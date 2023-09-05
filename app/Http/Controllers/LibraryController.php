@@ -12,6 +12,11 @@ class LibraryController extends Controller
     public function index()
     {
         //
+        /**
+         * get logged user class if student and retrieve books related to that class
+         *
+         */
+        return view('library.index');
     }
 
     /**
@@ -27,7 +32,9 @@ class LibraryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /**
+         * when a book is opened create a reading record for that student
+         */
     }
 
     /**
