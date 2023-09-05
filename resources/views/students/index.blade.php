@@ -16,26 +16,33 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>jdoe@elibrary.com</td>
-                            <th>Grade 1 Red</th>
-                            <td>
-                                <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-view-agenda"></i> Read Books</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-success rounded" href="#"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
-                            </td>
-                            <td>
-                                <form action="#" method="post">
-                                    @csrf
-                                    @method('Delete')
-                                    <button type="submit" class="btn btn-sm btn-danger rounded"
-                                    ><i class="mdi mdi-archive"></i> Delete Student</button
-                                    >
-                                </form>
-                            </td>
-                        </tr>
+
+                        @foreach($students as $student)
+                            <tr>
+                                <td>{{ $student->firstname }}&nbsp;{{ $student->lastname }}</td>
+                                <td>{{ $student->user->email }}</td>
+                                <td></td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary rounded" href="{{ route('students.show', $student) }}">
+                                        <i class="mdi mdi-view-agenda"></i>
+                                        Manage Classes
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-success rounded" href="{{ route('students.edit',$student) }}">
+                                        <i class="mdi mdi-tooltip-edit"></i> Update Details</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('students.destroy', $student) }}" method="post">
+                                        @csrf
+                                        @method('Delete')
+                                        <button type="submit" class="btn btn-sm btn-danger rounded"
+                                        ><i class="mdi mdi-archive"></i> Delete Student</button
+                                        >
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
 
                         </tbody>
                     </table>

@@ -12,14 +12,16 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Role</th>
                             <th colspan="3" class="text-center">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->firstname }}&nbsp;{{ $user->lastname }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
                                 <td>
                                     <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-power"></i> Reset Password</a>
                                 </td>
