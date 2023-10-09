@@ -23,7 +23,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view ('teachers.create');
     }
 
     /**
@@ -31,7 +31,18 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate incoming data
+        $request->validate([
+            'first_names' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'user_id' => 'required'
+        ]);
+
+        Teacher::create($request->all());
+
+        return redirect()->route('teachers.index')->with('success', 'Teacher created successfully.');
     }
 
     /**
@@ -47,7 +58,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        return view('teachers.edit', compact('teacher'));
     }
 
     /**
@@ -55,7 +66,17 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $request->validate([
+            'first_names' => 'required',
+            'surname' => 'required',
+            'email' => 'nullable|email|unique:teachers,email,'.$teacher->email,
+            'phone' => 'unique:teachers,phone_number,'.$teacher->phone_number,
+            'user_id' => 'required|unique:teachers,user_id,'.$teacher->user_id
+        ]);
+
+        $teacher->update($request->all());
+
+        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully.');
     }
 
     /**
@@ -63,6 +84,8 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+
+        return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfuly');
     }
 }
