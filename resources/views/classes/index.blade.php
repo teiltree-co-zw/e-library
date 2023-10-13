@@ -15,24 +15,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Grade 1 Red</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-view-agenda"></i> View Class</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-success rounded" href="#"><i class="mdi mdi-tooltip-edit"></i> Edit Class</a>
-                            </td>
-                            <td>
-                                <form action="#" method="post">
-                                    @csrf
-                                    @method('Delete')
-                                    <button type="submit" class="btn btn-sm btn-danger rounded"
-                                    ><i class="mdi mdi-archive"></i> Delete Class</button
-                                    >
-                                </form>
-                            </td>
-                        </tr>
+                            @foreach ( $classes as $class )
+                                <tr>
+                                    <td>{{ $class->name }}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-view-agenda"></i> View Class</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-success rounded" href="{{ route('classes.edit',$class) }}"><i class="mdi mdi-tooltip-edit"></i> Edit Class</a>
+                                    </td>
+                                    <td>
+                                        <form action="#" method="post">
+                                            @csrf
+                                            @method('Delete')
+                                            <button type="submit" class="btn btn-sm btn-danger rounded"
+                                            ><i class="mdi mdi-archive"></i> Delete Class</button
+                                            >
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        
 
                         </tbody>
                     </table>

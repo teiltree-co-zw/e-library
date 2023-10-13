@@ -13,7 +13,7 @@
                 <form method="POST" action="{{ route('teachers.store') }}">
                     @csrf
                     <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-fullname">First Names</label>
+                        <label class="form-label" for="basic-icon-default-fullname">First Name</label>
                         <div class="input-group input-group-merge">
                         <span id="basic-icon-default-fullname2" class="input-group-text"
                         ><i class="mdi mdi-account-multiple menu-icon"></i
@@ -23,10 +23,13 @@
                                 class="form-control"
                                 id="basic-icon-default-fullname"
                                 placeholder="John"
-                                name="first_names"
+                                name="first_name"
                                 required
                             />
                         </div>
+                        @error('first_name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
@@ -44,6 +47,9 @@
                                 required
                             />
                         </div>
+                        @error('surname')
+                            <small class="text-red">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -61,6 +67,9 @@
                                 required
                             />
                         </div>
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
@@ -77,6 +86,9 @@
                                 placeholder="0768980612"
                             />
                         </div>
+                        @error('phone_number')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -93,6 +105,9 @@
                                 placeholder="1"
                             />
                         </div>
+                        @error('user_id')
+                            <small class="text-red">{{ $message }}</small>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>

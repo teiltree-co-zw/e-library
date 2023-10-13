@@ -33,13 +33,14 @@ class TeacherController extends Controller
     {
         //validate incoming data
         $request->validate([
-            'first_names' => 'required',
+            'first_name' => 'required',
             'surname' => 'required',
             'email' => 'required',
             'phone_number' => 'required',
             'user_id' => 'required'
         ]);
 
+        
         Teacher::create($request->all());
 
         return redirect()->route('teachers.index')->with('success', 'Teacher created successfully.');
@@ -67,11 +68,11 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $request->validate([
-            'first_names' => 'required',
+            'first_name' => 'required',
             'surname' => 'required',
-            'email' => 'nullable|email|unique:teachers,email,'.$teacher->email,
-            'phone' => 'unique:teachers,phone_number,'.$teacher->phone_number,
-            'user_id' => 'required|unique:teachers,user_id,'.$teacher->user_id
+            'email' => 'nullable|email|unique:teachers,email,'.$teacher->id,
+            'phone_number' => 'unique:teachers,phone_number,'.$teacher->id,
+            'user_id' => 'required|'
         ]);
 
         $teacher->update($request->all());

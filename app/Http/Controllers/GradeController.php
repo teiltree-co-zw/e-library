@@ -13,8 +13,8 @@ class GradeController extends Controller
     public function index()
     {
         //
-
-        return view('classes.index');
+        $classes = Grade::all();
+        return view('classes.index', compact('classes'));
     }
 
     /**
@@ -23,6 +23,7 @@ class GradeController extends Controller
     public function create()
     {
         //
+        return view('classes.create');
     }
 
     /**
@@ -31,6 +32,13 @@ class GradeController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Grade::create($request->all());
+
+        return redirect()->route('classes.index')->with('success', 'Classes created successfully');
     }
 
     /**
@@ -47,6 +55,7 @@ class GradeController extends Controller
     public function edit(Grade $grade)
     {
         //
+        return view('classes.edit', compact('grade'));
     }
 
     /**

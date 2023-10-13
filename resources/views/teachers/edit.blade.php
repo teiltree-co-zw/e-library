@@ -14,7 +14,7 @@
                     @csrf
                     @method('put')
                     <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-fullname">First Names</label>
+                        <label class="form-label" for="basic-icon-default-fullname">First Name</label>
                         <div class="input-group input-group-merge">
                         <span id="basic-icon-default-fullname2" class="input-group-text"
                         ><i class="mdi mdi-account-multiple menu-icon"></i
@@ -23,11 +23,14 @@
                                 type="text"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                name="first_names"
+                                name="first_name"
                                 required
-                                value="{{ $teacher->first_names }}"
+                                value="{{ $teacher->first_name }}"
                             />
                         </div>
+                        @error('first_name')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
@@ -45,6 +48,9 @@
                                 value="{{ $teacher->surname }}"
                             />
                         </div>
+                        @error('surname')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -62,6 +68,9 @@
                                 value="{{ $teacher->email }}"
                             />
                         </div>
+                        @error('email')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     
                     <div class="mb-3">
@@ -78,6 +87,9 @@
                                 value="{{ $teacher->phone_number }}"
                             />
                         </div>
+                        @error('phone_number')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -94,8 +106,11 @@
                                 value="{{ $teacher->user_id }}"
                             />
                         </div>
+                        @error('user_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             </div>
         </div>
