@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-primary mx-auto m-5 p-2" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -25,7 +30,7 @@
                                         <a class="btn btn-sm btn-success rounded" href="{{ route('classes.edit',$class) }}"><i class="mdi mdi-tooltip-edit"></i> Edit Class</a>
                                     </td>
                                     <td>
-                                        <form action="#" method="post">
+                                        <form action="{{ route('classes.destroy',$class) }}" method="post">
                                             @csrf
                                             @method('Delete')
                                             <button type="submit" class="btn btn-sm btn-danger rounded"

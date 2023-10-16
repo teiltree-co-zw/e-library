@@ -22,6 +22,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return view('books.create');
     }
 
     /**
@@ -29,7 +30,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $request->validate([
+            'name' => 'required'
+        ]);
+
+        if($request->hasFile('book')) {
+            $formFields['book_path'] = $request->file('book')->store('books', 'public');
+        }
+
+        Book::create($formFields);
+
+        return redirect()->route('books.index')->with('success', 'Book created successfully');
+
     }
 
     /**

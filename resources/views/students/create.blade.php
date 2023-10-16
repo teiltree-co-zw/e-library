@@ -23,9 +23,10 @@
                                 type="text"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                placeholder="John"
+                                placeholder="Example: John"
                                 name="firstname"
                                 required
+                                value="{{ old('firstname') }}"
                             />
                         </div>
                         @error('firstname')
@@ -43,9 +44,10 @@
                                 type="text"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                placeholder="Doe"
+                                placeholder="Example: Doe"
                                 name="lastname"
                                 required
+                                value="{{ old('lastname') }}"
                             />
                         </div>
                         @error('lastname')
@@ -64,7 +66,8 @@
                                 name="user_id"
                                 id="basic-icon-default-phone"
                                 class="form-control phone-mask"
-                                placeholder="1"
+                                placeholder="Example: 1"
+                                value="{{ old('user_id') }}"
                             />
                         </div>
                         @error('user_id')

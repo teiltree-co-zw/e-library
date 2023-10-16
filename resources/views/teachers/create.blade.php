@@ -22,9 +22,10 @@
                                 type="text"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                placeholder="John"
+                                placeholder="Example: John"
                                 name="first_name"
                                 required
+                                value="{{ old('first_name') }}"
                             />
                         </div>
                         @error('first_name')
@@ -42,9 +43,10 @@
                                 type="text"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                placeholder="Doe"
+                                placeholder="Example: Doe"
                                 name="surname"
                                 required
+                                value="{{ old('surname') }}"
                             />
                         </div>
                         @error('surname')
@@ -62,9 +64,10 @@
                                 type="email"
                                 class="form-control"
                                 id="basic-icon-default-fullname"
-                                placeholder="johndoe@example.com"
+                                placeholder="Example: johndoe@example.com"
                                 name="email"
                                 required
+                                value="{{ old('email') }}"
                             />
                         </div>
                         @error('email')
@@ -83,7 +86,8 @@
                                 name="phone_number"
                                 id="basic-icon-default-phone"
                                 class="form-control phone-mask"
-                                placeholder="0768980612"
+                                placeholder="Example: 0768980612"
+                                value="{{ old('phone_number') }}"
                             />
                         </div>
                         @error('phone_number')
@@ -103,6 +107,7 @@
                                 id="basic-icon-default-phone"
                                 class="form-control phone-mask"
                                 placeholder="1"
+                                value="{{ old('user_id') }}"
                             />
                         </div>
                         @error('user_id')

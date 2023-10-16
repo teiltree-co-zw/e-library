@@ -8,7 +8,7 @@
     <div class="col-xl">
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0 text-success">Add New Class</h5>
+                <h5 class="mb-0 text-success">Update Class</h5>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('classes.update',$class) }}">
@@ -27,7 +27,7 @@
                                 placeholder="1 Red"
                                 name="name"
                                 required
-                                value="{{ $grade->name }}"
+                                value="{{ $class->name }}"
                             />
                         </div>
                         @error('name')

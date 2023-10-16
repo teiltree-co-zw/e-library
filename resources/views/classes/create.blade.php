@@ -22,10 +22,11 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                id="basic-icon-default-fullname"
-                                placeholder="1 Red"
+                                id="basic-icon-default-classname"
+                                placeholder="Example: Grade 1 Red"
                                 name="name"
                                 required
+                                value="{{ old('name') }}"
                             />
                         </div>
                         @error('name')

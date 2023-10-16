@@ -35,7 +35,7 @@ class TeacherController extends Controller
         $request->validate([
             'first_name' => 'required',
             'surname' => 'required',
-            'email' => 'required',
+            'email' => ['required', Rule::unique('teachers', 'email')],
             'phone_number' => 'required',
             'user_id' => 'required'
         ]);
