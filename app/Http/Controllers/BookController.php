@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -29,7 +30,33 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'book' => 'required|file|mimes:pdf,epub|max:2048',
+            'grade_id' => 'required|exists:grades,id',
+        ]);
         //
+        $grade = Grade::findOrFail($validatedData['grade_id']);
+
+        if ($request->file('book'))
+        {
+//            $path = $request->file('logo')->store('public/logo');
+            $book = $request->file('book');
+            $bookName = '';
+
+            if($book->isValid())
+            {
+                $bookName = strtolower($validatedData['name']).'.'.$book->getClientOriginalExtension();
+                $path = 'uploads/books/'.strtolower($grade).'/';
+
+//                move uploaded image to public
+                $book->move(public_path($path), $bookName);
+            }
+            $validatedData['book'] = $bookName;
+        }
+
+        Book::create($validatedData);
     }
 
     /**
