@@ -25,7 +25,7 @@
                                 id="basic-icon-default-fullname"
                                 name="first_name"
                                 required
-                                value="{{ $teacher->first_name }}"
+                                value="{{ $teacher->firstname }}"
                             />
                         </div>
                         @error('first_name')
@@ -45,7 +45,7 @@
                                 id="basic-icon-default-fullname"
                                 name="surname"
                                 required
-                                value="{{ $teacher->surname }}"
+                                value="{{ $teacher->lastname }}"
                             />
                         </div>
                         @error('surname')
@@ -72,44 +72,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-phone">Phone Number</label>
-                        <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-phone2" class="input-group-text"
-                        ><i class="mdi mdi-account-multiple menu-icon"></i
-                            ></span>
-                            <input
-                                type="number"
-                                name="phone_number"
-                                id="basic-icon-default-phone"
-                                class="form-control phone-mask"
-                                value="{{ $teacher->phone_number }}"
-                            />
-                        </div>
-                        @error('phone_number')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-phone">User Id</label>
-                        <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-phone2" class="input-group-text"
-                        ><i class="mdi mdi-account-multiple menu-icon"></i
-                            ></span>
-                            <input
-                                type="number"
-                                name="user_id"
-                                id="basic-icon-default-phone"
-                                class="form-control"
-                                value="{{ $teacher->user_id }}"
-                            />
-                        </div>
-                        @error('user_id')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             </div>

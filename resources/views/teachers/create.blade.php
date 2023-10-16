@@ -23,12 +23,12 @@
                                 class="form-control"
                                 id="basic-icon-default-fullname"
                                 placeholder="Example: John"
-                                name="first_name"
+                                name="firstname"
                                 required
-                                value="{{ old('first_name') }}"
+                                value="{{ old('firstname') }}"
                             />
                         </div>
-                        @error('first_name')
+                        @error('firstname')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -44,12 +44,12 @@
                                 class="form-control"
                                 id="basic-icon-default-fullname"
                                 placeholder="Example: Doe"
-                                name="surname"
+                                name="lastname"
                                 required
-                                value="{{ old('surname') }}"
+                                value="{{ old('lastname') }}"
                             />
                         </div>
-                        @error('surname')
+                        @error('lastname')
                             <small class="text-red">{{ $message }}</small>
                         @enderror
                     </div>
@@ -74,46 +74,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-phone">Phone Number</label>
-                        <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-phone2" class="input-group-text"
-                        ><i class="mdi mdi-account-multiple menu-icon"></i
-                            ></span>
-                            <input
-                                type="number"
-                                name="phone_number"
-                                id="basic-icon-default-phone"
-                                class="form-control phone-mask"
-                                placeholder="Example: 0768980612"
-                                value="{{ old('phone_number') }}"
-                            />
-                        </div>
-                        @error('phone_number')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-phone">User Id</label>
-                        <div class="input-group input-group-merge">
-                        <span id="basic-icon-default-phone2" class="input-group-text"
-                        ><i class="mdi mdi-account-multiple menu-icon"></i
-                            ></span>
-                            <input
-                                type="number"
-                                name="user_id"
-                                id="basic-icon-default-phone"
-                                class="form-control phone-mask"
-                                placeholder="1"
-                                value="{{ old('user_id') }}"
-                            />
-                        </div>
-                        @error('user_id')
-                            <small class="text-red">{{ $message }}</small>
-                        @enderror
-                    </div>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </form>
             </div>
