@@ -23,8 +23,8 @@
                         <tbody>
                         @foreach($teachers as $teacher)
                             <tr>
-                                <td>{{ $teacher->first_name }}&nbsp;{{ $teacher->surname }}</td>
-                                <td>{{ $teacher->email }}</td>
+                                <td>{{ $teacher->firstname }}&nbsp;{{ $teacher->lastname }}</td>
+                                <td>{{ $teacher->user->email }}</td>
                                 <td>
                                     <a class="btn btn-sm btn-primary rounded" href="{{ route('teachers.show', $teacher) }}">
                                         <i class="mdi mdi-view-agenda"></i>
