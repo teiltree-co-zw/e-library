@@ -15,24 +15,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Sunrise Readers</td>
-                            <td>
-                                <a class="btn btn-sm btn-primary rounded" href="#"><i class="mdi mdi-view-agenda"></i> Assign To Class</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-sm btn-success rounded" href="#"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
-                            </td>
-                            <td>
-                                <form action="#" method="post">
-                                    @csrf
-                                    @method('Delete')
-                                    <button type="submit" class="btn btn-sm btn-danger rounded"
-                                    ><i class="mdi mdi-archive"></i> Remove Book</button
-                                    >
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach($books as $book)
+                            <tr>
+                                <td>{{$book->name}}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-success rounded" href="#"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
+                                </td>
+                                <td>
+                                    <form action="{{ route('books.destroy', $book) }}" method="post">
+                                        @csrf
+                                        @method('Delete')
+                                        <button type="submit" class="btn btn-sm btn-danger rounded"
+                                        ><i class="mdi mdi-archive"></i> Remove Book</button
+                                        >
+                                    </form>
+                                </td>
+                            </tr>
+
+                        @endforeach
 
                         </tbody>
                     </table>

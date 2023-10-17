@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\ClassBook;
 use App\Models\Grade;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
-        return view('books.index');
+
+        $books = Book::all();
+
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -23,7 +26,9 @@ class BookController extends Controller
     public function create()
     {
         //
-        return view('books.create');
+        $grades = Grade::all();
+
+        return view('books.create', compact('grades'));
     }
 
     /**
@@ -32,34 +37,58 @@ class BookController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'book' => 'required|file|mimes:pdf,epub|max:2048',
+        $validateGrade = $request->validate([
             'grade_id' => 'required|exists:grades,id',
         ]);
-        //
-        $grade = Grade::findOrFail($validatedData['grade_id']);
 
-        if ($request->file('book'))
+        $validatedData = $request->validate([
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'name' => 'required|string',
+            'book_path' => 'required|file|mimes:pdf,epub|max:2048',
+        ]);
+        //
+        $grade = Grade::findOrFail($validateGrade['grade_id']);
+
+
+        if ($request->file('book_path'))
         {
 //            $path = $request->file('logo')->store('public/logo');
-            $book = $request->file('book');
+            $book = $request->file('book_path');
             $bookName = '';
 
             if($book->isValid())
             {
                 $bookName = strtolower($validatedData['name']).'.'.$book->getClientOriginalExtension();
-                $path = 'uploads/books/'.strtolower($grade).'/';
+                $path = 'uploads/books/'.strtolower($grade->name).'/';
 
 //                move uploaded image to public
                 $book->move(public_path($path), $bookName);
             }
-            $validatedData['book'] = $bookName;
+            $validatedData['book_path'] = $bookName;
         }
 
-        Book::create($validatedData);
+        if ($request->file('thumbnail'))
+        {
+//            $path = $request->file('logo')->store('public/logo');
+            $image = $request->file('thumbnail');
+            $imageName = '';
 
+            if($image->isValid())
+            {
+                $imageName = strtolower($validatedData['name']).'.'.$image->getClientOriginalExtension();
 
+//                move uploaded image to public
+                $image->move(public_path('uploads/books/thumbnails'), $imageName);
+            }
+            $validatedData['thumbnail'] = $imageName;
+        }
+
+        $book = Book::create($validatedData);
+
+        ClassBook::create([
+            'class_id' => $grade->id,
+            'book_id' => $book->id
+        ]);
 
         return redirect()->route('books.index')->with('success', 'Book created successfully');
 
@@ -95,5 +124,8 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+        $book->delete();
+
+        return back()->with('message', 'Book removed from the system.');
     }
 }
