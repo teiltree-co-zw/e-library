@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LibraryController extends Controller
 {
@@ -12,11 +15,19 @@ class LibraryController extends Controller
     public function index()
     {
         //
+
         /**
          * get logged user class if student and retrieve books related to that class
          *
          */
-        return view('library.index');
+        if (Auth::user()->role == 'student')
+        {
+            $student = Student::where('user_id',Auth::user()->id)->first();
+        }
+
+        $books = Book::all();
+
+        return view('library.index', compact('books'));
     }
 
     /**

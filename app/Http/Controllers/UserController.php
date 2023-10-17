@@ -69,8 +69,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('users.index')->with(['success', 'User created successfully!',
-            'password' => $password]);
+        return redirect()->route('users.index')->with('success', 'User created successfully! '.$password);
     }
 
     /**
@@ -103,5 +102,6 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+
     }
 }
