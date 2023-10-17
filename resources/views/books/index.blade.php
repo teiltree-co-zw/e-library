@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Books</h4>
-                    <a href="{{ route('users.create') }}" class="btn btn-success btn-sm float-end"><i class="mdi mdi-folder-plus"></i> Upload New Book</a>
+                    <a href="{{ route('books.create') }}" class="btn btn-success btn-sm float-end"><i class="mdi mdi-folder-plus"></i> Upload New Book</a>
                     <table class="table table-hover">
                         <thead>
                         <tr>

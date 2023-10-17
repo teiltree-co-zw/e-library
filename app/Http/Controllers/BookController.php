@@ -23,6 +23,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return view('books.create');
     }
 
     /**
@@ -57,6 +58,11 @@ class BookController extends Controller
         }
 
         Book::create($validatedData);
+
+
+
+        return redirect()->route('books.index')->with('success', 'Book created successfully');
+
     }
 
     /**
