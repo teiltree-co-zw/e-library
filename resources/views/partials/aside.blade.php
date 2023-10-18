@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <nav class="sidebar bg-white sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-category">Main</li>
@@ -31,20 +32,22 @@
                 <span class="menu-title">Books & Files</span>
             </a>
         </li>
-        <li class="nav-item {{ request()->routeIs('library.*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('library.index') }}">
-                <span class="icon-bg"><i class="mdi mdi-book-open-page-variant menu-icon"></i></span>
-                <span class="menu-title">Library</span>
-            </a>
-        </li>
-
+        @if(Auth::user()->role == 'Admin')
+            <li class="nav-item {{ request()->routeIs('library.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('library.index') }}" target="_blank">
+                    <span class="icon-bg"><i class="mdi mdi-book-open-page-variant menu-icon"></i></span>
+                    <span class="menu-title">Library</span>&nbsp; <i class="fa fa-external-link"></i>
+                </a>
+            </li>
+        @endif
 
         <li>
             <div role="separator" class="dropdown-divider"></div>
         </li>
         <li class="nav-item sidebar-user-actions {{ request()->routeIs('users.*') ? 'active' : '' }}">
             <div class="sidebar-user-menu">
-                <a href="{{ route('users.index') }}" class="nav-link"><i class="mdi mdi-account-multiple-outline menu-icon"></i>
+                <a href="{{ route('users.index') }}" class="nav-link"><i
+                        class="mdi mdi-account-multiple-outline menu-icon"></i>
                     <span class="menu-title">Users (Admins)</span>
                 </a>
             </div>

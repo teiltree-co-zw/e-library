@@ -5,14 +5,6 @@
         <a class="navbar-brand bg-white font-weight-bold text-success brand-logo"
            href="{{ route('home') }}">E-Library</a>
         <div class="search-field d-none d-xl-block">
-            {{--            <form class="d-flex align-items-center h-100" action="#">--}}
-            {{--                <div class="input-group">--}}
-            {{--                    <div class="input-group-prepend bg-transparent">--}}
-            {{--                        <i class="input-group-text border-0 mdi mdi-magnify"></i>--}}
-            {{--                    </div>--}}
-            {{--                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">--}}
-            {{--                </div>--}}
-            {{--            </form>--}}
         </div>
         <ul class="navbar-nav navbar-nav-right">
 
@@ -35,11 +27,6 @@
                             <span class="p-0">
                       <i class="mdi mdi-account-outline ml-1"></i>
                     </span>
-                        </a>
-                        <a class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-                           href="javascript:void(0)">
-                            <span>Settings</span>
-                            <i class="mdi mdi-settings"></i>
                         </a>
                         <div role="separator" class="dropdown-divider"></div>
 

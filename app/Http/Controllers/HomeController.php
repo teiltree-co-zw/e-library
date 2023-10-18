@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Grade;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +32,12 @@ class HomeController extends Controller
         {
             return redirect()->route('library.index');
         }
-        return view('home');
+
+        $students = Student::count();
+        $classes = Grade::count();
+        $books = Book::count();
+        $teachers = Teacher::count();
+
+        return view('home', compact('teachers', 'students', 'classes', 'books'));
     }
 }
