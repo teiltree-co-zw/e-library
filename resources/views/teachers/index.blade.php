@@ -17,6 +17,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Grade Assigned</th>
                             <th colspan="3" class="text-center">Actions</th>
                         </tr>
                         </thead>
@@ -25,6 +26,9 @@
                             <tr>
                                 <td>{{ $teacher->firstname }}&nbsp;{{ $teacher->lastname }}</td>
                                 <td>{{ $teacher->user->email }}</td>
+                                <td>
+                                    {{ $teacher->teacher_class($teacher->id) }}
+                                </td>
                                 <td>
                                     <a class="btn btn-sm btn-primary rounded" href="{{ route('teachers.show', $teacher) }}">
                                         <i class="mdi mdi-view-agenda"></i>

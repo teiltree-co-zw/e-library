@@ -27,7 +27,9 @@
                             <tr>
                                 <td>{{ $student->firstname }}&nbsp;{{ $student->lastname }}</td>
                                 <td>{{ $student->user->email }}</td>
-                                <td></td>
+                                <td>
+                                    {{ $student->student_class($student->id) }}
+                                </td>
                                 <td>
                                     <a class="btn btn-sm btn-primary rounded" href="{{ route('students.show', $student) }}">
                                         <i class="mdi mdi-view-agenda"></i>
