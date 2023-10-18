@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\User;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -47,7 +49,7 @@ class TeacherController extends Controller
         $validated['role'] = 'Teacher';
 
         $user = User::create($validated);
-        
+
         Teacher::create([
             'firstname' => $validated['firstname'],
             'lastname' => $validated['lastname'],
@@ -64,6 +66,18 @@ class TeacherController extends Controller
     public function show(Teacher $teacher)
     {
         //
+        $class = DB::table('teachers_grades')->where('teacher_id', $teacher->id)->first();
+
+        if ($class)
+        {
+            $grade = Grade::findOrFail($class->class_id);
+        }else{
+            $grade = null;
+        }
+
+        $grades = Grade::all();
+
+        return view('teachers.show', compact('teacher', 'grade', 'grades'));
     }
 
     /**
@@ -88,6 +102,31 @@ class TeacherController extends Controller
         $teacher->update($request->all());
 
         return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully.');
+    }
+
+    public function assign_grade(Request $request, Teacher $teacher)
+    {
+        $check = DB::table('teachers_grades')->where('teacher_id', $teacher->id)->first();
+
+        if ($check)
+        {
+            DB::table('teachers_grades')
+                ->where('teacher_id', $teacher->id)
+                ->update([
+                    'class_id' => $request->grade_id
+                ]);
+        }
+        else{
+
+            DB::table('teachers_grades')->insert([
+                'teacher_id' => $teacher->id,
+                'class_id' => $request->grade_id
+            ]);
+        }
+
+        $grade = Grade::findOrFail($request->grade_id);
+
+        return back()->with('success', 'Teacher Assigned to '.$grade->name);
     }
 
     /**

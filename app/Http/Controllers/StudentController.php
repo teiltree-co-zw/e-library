@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -50,6 +52,18 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         //
+        $class = DB::table('student_classes')->where('student_id', $student->id)->first();
+
+        if ($class)
+        {
+            $grade = Grade::findOrFail($class->class_id);
+        }else{
+            $grade = null;
+        }
+
+        $grades = Grade::all();
+
+        return view('students.show', compact('student', 'grade', 'grades'));
     }
 
     /**
@@ -76,6 +90,31 @@ class StudentController extends Controller
         $student->update($request->all());
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully');
+    }
+
+    public function assign_grade(Request $request, Student $student)
+    {
+        $check = DB::table('student_classes')->where('student_id', $student->id)->first();
+
+        if ($check)
+        {
+            DB::table('student_classes')
+                ->where('student_id', $student->id)
+                ->update([
+                    'class_id' => $request->grade_id
+                ]);
+        }
+        else{
+
+            DB::table('student_classes')->insert([
+                'class_id' => $request->grade_id,
+                'student_id'=> $student->id
+            ]);
+        }
+
+        $grade = Grade::findOrFail($request->grade_id);
+
+        return back()->with('success', 'Student Enrolled to '.$grade->name);
     }
 
     /**
