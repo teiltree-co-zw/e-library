@@ -11,10 +11,10 @@
                             <h3>{{ $book->name }}</h3>
                         </div>
                         <div class="card-body">
-                            <img width="261" height="300" src="{{ asset('uploads/books/thumbnails/'.$book->thumbnail) }}" alt="{{ $book->name }}">
+                            <img class="rounded" width="261" height="300" src="{{ asset('uploads/books/thumbnails/'.$book->thumbnail) }}" alt="{{ $book->name }}">
                         </div>
                         <div class="card-footer ">
-                            <button class="btn btn-sm btn-success rounded-pill">Read</button>
+                            <a href="{{ route('books.show', $book) }}" class="btn btn-sm btn-success rounded-pill">Read</a>
                         </div>
                     </div>
                 </div>

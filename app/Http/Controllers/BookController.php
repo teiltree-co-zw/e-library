@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\ClassBook;
 use App\Models\Grade;
+use App\Models\ReadingRecord;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\String\b;
 
 class BookController extends Controller
 {
@@ -64,7 +67,7 @@ class BookController extends Controller
 //                move uploaded image to public
                 $book->move(public_path($path), $bookName);
             }
-            $validatedData['book_path'] = $bookName;
+            $validatedData['book_path'] = $path.$bookName;
         }
 
         if ($request->file('thumbnail'))
@@ -99,7 +102,34 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        /**
+         * Get student - store book reading record
+         */
+
+       ReadingRecord::create([
+           'book_id' => $book->id,
+           'student_id' => Auth::user()->id,
+           'datetime' => now(),
+           'read_start' => now()
+       ]);
+
+       return view('books.show', compact('book'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function close(Book $book)
+    {
+        /**
+         * Get student - store book reading record
+         */
+
+        ReadingRecord::where('book_id', $book->id)->latest()->update([
+           'read_end' => now()
+        ]);
+
+        return redirect()->route('library.index');
     }
 
     /**

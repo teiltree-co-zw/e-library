@@ -37,5 +37,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('classes', GradeController::class);
     Route::resource('users', UserController::class);
     Route::resource('library', LibraryController::class);
+    Route::get('/close/{book}', [BookController::class, 'close'])->name('close');
 
 });
