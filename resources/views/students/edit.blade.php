@@ -57,21 +57,21 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="basic-icon-default-phone">User Id</label>
+                        <label class="form-label" for="basic-icon-default-phone">Email</label>
                         <div class="input-group input-group-merge">
                         <span id="basic-icon-default-phone2" class="input-group-text"
-                        ><i class="mdi mdi-account-multiple menu-icon"></i
+                        ><i class="mdi mdi-email-outline"></i
                             ></span>
                             <input
-                                type="number"
-                                name="user_id"
+                                type="email"
+                                name="email"
                                 id="basic-icon-default-phone"
                                 class="form-control phone-mask"
-                                placeholder="1"
-                                value="{{ $student->user_id }}"
+                                placeholder="Example: johndoe@example.com"
+                                value="{{ $student->user->email }}"
                             />
                         </div>
-                        @error('user_id')
+                        @error('email')
                             <small class="text-red">{{ $message }}</small>
                         @enderror
                     </div>

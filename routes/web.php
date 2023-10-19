@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\BookController;
-use App\Http\Controllers\GradeController;
-use App\Http\Controllers\LibraryController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GradeController;
+use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,5 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('library', LibraryController::class);
     Route::get('/close/{book}', [BookController::class, 'close'])->name('close');
+    Route::get('/report', [ReportsController::class, 'index'])->name('report');
 
 });

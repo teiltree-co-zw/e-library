@@ -32,6 +32,12 @@
                 <span class="menu-title">Books & Files</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->routeIs('report') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('report') }}">
+                <span class="icon-bg"><i class="mdi mdi-book-multiple-variant menu-icon"></i></span>
+                <span class="menu-title">Report</span>
+            </a>
+        </li>
         @if(Auth::user()->role == 'Admin')
             <li class="nav-item {{ request()->routeIs('library.*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('library.index') }}" target="_blank">

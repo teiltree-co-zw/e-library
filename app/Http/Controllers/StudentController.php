@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Grade;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -35,13 +37,23 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
+        $validated = $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'user_id' => 'required'
+            'email' => 'required'
         ]);
 
-        Student::create($request->all());
+        $password = 'student@1234';
+        $validated['password'] = Hash::make($password);
+        $validated['role'] = 'Teacher';
+
+        $user = User::create($validated);
+
+        Student::create([
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'user_id' => $user->id
+        ]);
 
         return redirect()->route('students.index')->with('success', 'Student created successfully');
     }
@@ -84,7 +96,7 @@ class StudentController extends Controller
         $request->validate([
             'firstname' => 'required',
             'lastname' => 'required',
-            'user_id' => 'required'
+            'email' => 'required'
         ]);
 
         $student->update($request->all());
@@ -114,7 +126,7 @@ class StudentController extends Controller
 
         $grade = Grade::findOrFail($request->grade_id);
 
-        return back()->with('success', 'Student Enrolled to '.$grade->name);
+        return redirect()->route('students.index')->with('success', 'Student Enrolled to '.$grade->name);
     }
 
     /**
