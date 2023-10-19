@@ -12,9 +12,10 @@ class StudentClass extends Model
 
     protected $guarded = [];
 
-    public function grade(): BelongsTo
+    public function grade($id)
     {
-        return $this->belongsTo(Grade::class);
+        $grade = Grade::findOrFail($id);
+        return $grade->name;
     }
 
     public function student(): BelongsTo

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\ClassBook;
 use App\Models\Student;
+use App\Models\StudentClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,14 +22,35 @@ class LibraryController extends Controller
          * get logged user class if student and retrieve books related to that class
          *
          */
-        if (Auth::user()->role == 'student')
+        if (Auth::user()->role == 'Student')
         {
             $student = Student::where('user_id',Auth::user()->id)->first();
+            $class = StudentClass::where('student_id',$student->id)->first();
+            $grade = $class->grade($class->class_id);
+
+            // get all books in your class
+            $found = ClassBook::where('class_id', $class->class_id)->get();
+
+
+
+            $books = [];
+
+            foreach ($found as $f)
+            {
+                $book = Book::findOrFail($f->book_id);
+                $books[] = $book;
+            }
+
+//            dd($books);
+
+            return view('library.index', compact('books', 'grade'));
+
         }
 
         $books = Book::all();
+        $grade = null;
 
-        return view('library.index', compact('books'));
+        return view('library.index', compact('books', 'grade'));
     }
 
     /**

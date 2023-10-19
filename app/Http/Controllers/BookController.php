@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\ClassBook;
 use App\Models\Grade;
 use App\Models\ReadingRecord;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\String\b;
@@ -105,13 +106,18 @@ class BookController extends Controller
         /**
          * Get student - store book reading record
          */
+        if (Auth::user()->role == 'Student') {
+            $student = Student::where('user_id', Auth::user()->id)->first();
 
-       ReadingRecord::create([
-           'book_id' => $book->id,
-           'student_id' => Auth::user()->id,
-           'datetime' => now(),
-           'read_start' => now()
-       ]);
+            ReadingRecord::create([
+                'book_id' => $book->id,
+                'student_id' => $student->id,
+                'datetime' => now(),
+                'read_start' => now()
+            ]);
+
+            return view('books.show', compact('book'));
+        }
 
        return view('books.show', compact('book'));
     }
@@ -124,10 +130,14 @@ class BookController extends Controller
         /**
          * Get student - store book reading record
          */
+        if (Auth::user()->role == 'Student') {
+            $student = Student::where('user_id', Auth::user()->id)->first();
 
-        ReadingRecord::where('book_id', $book->id)->latest()->update([
-           'read_end' => now()
-        ]);
+            ReadingRecord::where('book_id', $book->id)->where('student_id', $student->id)->latest()->update([
+                'read_end' => now()
+            ]);
+            return redirect()->route('library.index');
+        }
 
         return redirect()->route('library.index');
     }
@@ -156,6 +166,6 @@ class BookController extends Controller
         //
         $book->delete();
 
-        return back()->with('message', 'Book removed from the system.');
+        return back()->with('success', 'Book removed from the system.');
     }
 }

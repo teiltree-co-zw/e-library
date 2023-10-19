@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="mt-5">
-        <h2 class="h2 page-title p-2">Class: </h2>
+        @if($grade)
+            <h1 class="h2 page-title p-2">Class: {{ $grade }}</h1>
+        @endif
+
         <div class="row">
             @foreach($books as $book)
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 p-2">
