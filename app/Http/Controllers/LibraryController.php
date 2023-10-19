@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\ClassBook;
+use App\Models\Grade;
 use App\Models\Student;
 use App\Models\StudentClass;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
 {
@@ -26,22 +29,53 @@ class LibraryController extends Controller
         {
             $student = Student::where('user_id',Auth::user()->id)->first();
             $class = StudentClass::where('student_id',$student->id)->first();
-            $grade = $class->grade($class->class_id);
-
-            // get all books in your class
-            $found = ClassBook::where('class_id', $class->class_id)->get();
-
-
-
             $books = [];
 
-            foreach ($found as $f)
-            {
-                $book = Book::findOrFail($f->book_id);
-                $books[] = $book;
+            if ($class) {
+                $grade = $class->grade($class->class_id);
+
+                // get all books in your class
+                $found = ClassBook::where('class_id', $class->class_id)->get();
+
+
+
+                foreach ($found as $f)
+                {
+                    $book = Book::findOrFail($f->book_id);
+                    $books[] = $book;
+                }
+            }else{
+                $grade = null;
             }
 
 //            dd($books);
+
+            return view('library.index', compact('books', 'grade'));
+
+        }elseif (Auth::user()->role == 'Teacher')
+        {
+            $teacher = Teacher::where('user_id',Auth::user()->id)->first();
+            $class = DB::table('teachers_grades')->where('teacher_id',$teacher->id)->first();
+            $books = [];
+
+            if ($class){
+                $c = Grade::findOrFail($class->class_id);
+                $grade = $c->name; 
+                // get all books in your class
+                $found = ClassBook::where('class_id', $class->class_id)->get();
+
+
+
+                foreach ($found as $f)
+                {
+                    $book = Book::findOrFail($f->book_id);
+                    $books[] = $book;
+                }
+
+            }else{
+                $grade = null;
+            }
+
 
             return view('library.index', compact('books', 'grade'));
 
