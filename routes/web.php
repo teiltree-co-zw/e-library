@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('library', LibraryController::class);
     Route::get('/close/{book}', [BookController::class, 'close'])->name('close');
-    Route::get('/report', [ReportsController::class, 'index'])->name('report');
+    Route::get('/report/{id}', [ReportsController::class, 'index'])->name('report');
+    Route::get('/reports', [ReportsController::class, 'reports'])->name('reports');
 
 });

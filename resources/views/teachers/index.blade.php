@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Teachers</h4>
-                    <a href="{{ route('teachers.create') }}" class="btn btn-success btn-sm float-end"><i class="mdi mdi-folder-plus"></i> New Teacher</a>
+{{--                    <a href="{{ route('teachers.create') }}" class="btn btn-success btn-sm float-end"><i class="mdi mdi-folder-plus"></i> New Teacher</a>--}}
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -35,9 +35,9 @@
                                         Manage Classes
                                     </a>
                                 </td>
-                                <td>
-                                    <a class="btn btn-sm btn-success rounded" href="{{ route('teachers.edit',$teacher) }}"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>
-                                </td>
+{{--                                <td>--}}
+{{--                                    <a class="btn btn-sm btn-success rounded" href="{{ route('teachers.edit',$teacher) }}"><i class="mdi mdi-tooltip-edit"></i> Update Details</a>--}}
+{{--                                </td>--}}
                                 <td>
                                     <form action="{{ route('teachers.destroy', $teacher) }}" method="post">
                                         @csrf

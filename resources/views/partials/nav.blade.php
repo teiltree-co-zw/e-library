@@ -23,10 +23,10 @@
         <ul class="navbar-nav navbar-nav-right">
             @if(Auth::user()->role == 'Teacher')
                 <li class="nav-item  dropdown d-none d-md-block">
-                    <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" id="reportDropdown" href="{{ route('reports') }}" data-toggle="dropdown"
                        aria-expanded="false"> Reports </a>
                     <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="{{ route('reports') }}">
                             <i class="mdi mdi-file-pdf mr-2"></i>Book Readings </a>
                         <div class="dropdown-divider"></div>
                     </div>
