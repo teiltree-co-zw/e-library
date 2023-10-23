@@ -19,11 +19,13 @@
                         </thead>
                         <tbody>
                         @foreach ($records as $record)
+                        <tr>
                             <th>{{ $loop->iteration }}</th>
                             <th>{{ $record->book->name }}</th>
                             <th>{{ $record->student->firstname }}&nbsp;{{ $record->student->lastname }}</th>
                             {{-- <th>{{ $record->getReadingDurationAttribute() }}</th> --}}
                             <th></th>
+                        </tr>
                         @endforeach
 
                         </tbody>
