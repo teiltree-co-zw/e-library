@@ -91,9 +91,9 @@
                                         <input type="checkbox" class="form-check-input" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Keep me signed in </label>
                                 </div>
                                 @if (Route::has('password.request'))
-                                    <a class="auth-link text-black" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
+{{--                                    <a class="auth-link text-black" href="{{ route('password.request') }}">--}}
+{{--                                        {{ __('Forgot Your Password?') }}--}}
+{{--                                    </a>--}}
                                 @endif
                             </div>
 
