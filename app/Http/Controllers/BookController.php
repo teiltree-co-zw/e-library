@@ -7,6 +7,7 @@ use App\Models\ClassBook;
 use App\Models\Grade;
 use App\Models\ReadingRecord;
 use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\String\b;
@@ -20,6 +21,7 @@ class BookController extends Controller
     {
 
         $books = Book::all();
+
 
         return view('books.index', compact('books'));
     }
